@@ -11,7 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+         Schema::create('cars', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('brand_id')->references('id')->on('brands');
+            $table->string('model');
+            $table->integer('year');
+            $table->string('color');
+            $table->string('license_plate')->unique();
+            $table->integer('mileage');
+            $table->decimal('lat',10,7);
+            $table->decimal('ing',10,7);
+            $table->integer('is_premium');
+            $table->integer('rental_count');
+            $table->integer('daily_rate');
+            $table->enum('status',['available','rented','maintenance','retired'])->default('available');
+
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('cars');
     }
 };

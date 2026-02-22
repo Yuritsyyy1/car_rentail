@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::create('drivers', function (Blueprint $table) {
+        Schema::create('loyalty_levels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->string('license_number')->unique();
-            $table->string('license_img',255);
+            $table->string('name');
+            $table->integer('min_points');
+            $table->integer('discount_percentage');
+            $table->integer('free_extra_hours');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+   
     public function down(): void
     {
-        Schema::dropIfExists('drivers');
+         Schema::dropIfExists('loyalty_levels');
     }
 };
